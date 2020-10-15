@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
+import useSWR from "swr";
 import {
   Tooltip,
   Space,
@@ -15,61 +16,12 @@ import {
   DownloadOutlined,
   GithubOutlined,
 } from "@ant-design/icons";
+import { useWindowWidth } from "@react-hook/window-size";
 
 import "./App.less";
 
 const { Content, Footer, Sider } = Layout;
 const { Text, Paragraph } = Typography;
-
-function useFetch(url, opts) {
-  const [response, setResponse] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
-  useEffect(() => {
-    setLoading(true);
-    fetch(url, opts)
-      .then((response) => response.json())
-      .then((response) => {
-        setResponse(response);
-        setLoading(false);
-      })
-      .catch(() => {
-        setHasError(true);
-        setLoading(false);
-      });
-  }, [opts, url]);
-  return [response, loading, hasError];
-}
-
-function useWindowSize() {
-  // Initialize state with undefined width/height so server and client renders match
-  const [windowSize, setWindowSize] = useState({
-    width: undefined,
-    height: undefined,
-  });
-
-  useEffect(() => {
-    // Handler to call on window resize
-    function handleResize() {
-      // Set window width/height to state
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    }
-
-    // Add event listener
-    window.addEventListener("resize", handleResize);
-
-    // Call handler right away so state gets updated with initial window size
-    handleResize();
-
-    // Remove event listener on cleanup
-    return () => window.removeEventListener("resize", handleResize);
-  }, []); // Empty array ensures that effect is only run on mount
-
-  return windowSize;
-}
 
 const App = () => {
   const searchInput = useRef(null);
@@ -132,9 +84,10 @@ const App = () => {
     },
   });
 
-  const [response, loading, hasError] = useFetch("/firmware/signatures.json");
+  const { data: response, error } = useSWR("/firmware/signatures.json");
+  const loading = !response;
 
-  if (!loading && hasError) {
+  if (!loading && error) {
     message.error("Could not load firmwares");
   }
 
@@ -192,7 +145,7 @@ const App = () => {
     },
   ];
 
-  if (!loading && !hasError && Array.isArray(response) && response.length) {
+  if (!loading && !error && Array.isArray(response) && response.length) {
     const versions = response.map((a) => a.secVersion);
     columns[3].filters = [...new Set(versions)]
       .filter(Boolean)
@@ -212,10 +165,10 @@ const App = () => {
       }));
   }
 
-  const size = useWindowSize();
+  const windowWidth = useWindowWidth();
 
   const scrollProp =
-    (size.width < 700 && {
+    (windowWidth < 700 && {
       scroll: { x: 700 },
     }) ||
     {};
