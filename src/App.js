@@ -10,7 +10,11 @@ import {
   message,
   Typography,
 } from "antd";
-import { SearchOutlined, DownloadOutlined } from "@ant-design/icons";
+import {
+  SearchOutlined,
+  DownloadOutlined,
+  GithubOutlined,
+} from "@ant-design/icons";
 
 import "./App.less";
 
@@ -219,7 +223,11 @@ const App = () => {
             />
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>Lunars</Footer>
+        <Footer style={{ textAlign: "center" }}>
+          <a href="https://github.com/Lunars/tesla">
+            <GithubOutlined /> Lunars Github
+          </a>
+        </Footer>
       </Layout>
     </Layout>
   );
