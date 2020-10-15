@@ -1,5 +1,3 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
-
 # dependencies
 node_modules
 
@@ -8,8 +6,11 @@ coverage
 
 # production
 build
+public/firmware
 
 # misc
 .DS_Store
 .env
 npm-debug.log
+yarn-error.log
+/.idea/
