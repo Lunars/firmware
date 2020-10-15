@@ -41,6 +41,36 @@ function useFetch(url, opts) {
   return [response, loading, hasError];
 }
 
+function useWindowSize() {
+  // Initialize state with undefined width/height so server and client renders match
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined,
+  });
+
+  useEffect(() => {
+    // Handler to call on window resize
+    function handleResize() {
+      // Set window width/height to state
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
+
+    // Remove event listener on cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []); // Empty array ensures that effect is only run on mount
+
+  return windowSize;
+}
+
 const App = () => {
   const searchInput = useRef(null);
 
@@ -120,6 +150,7 @@ const App = () => {
       title: "Type",
       dataIndex: "type",
       key: "type",
+      width: "10%",
       render: (b, a) => a.downloadUrl.split(".").splice(-1)[0],
       onFilter: (value, record) => record.downloadUrl.includes(value),
     },
@@ -181,6 +212,14 @@ const App = () => {
       }));
   }
 
+  const size = useWindowSize();
+
+  const scrollProp =
+    (size.width < 700 && {
+      scroll: { x: 700 },
+    }) ||
+    {};
+
   return (
     <Layout>
       <Sider breakpoint="lg" collapsedWidth="0">
@@ -200,6 +239,7 @@ const App = () => {
         <Content style={{ margin: "24px 16px 0" }}>
           <div style={{ padding: 24, background: "#fff", minHeight: 360 }}>
             <Table
+              {...scrollProp}
               loading={loading}
               expandedRowRender={(record) => (
                 <>
