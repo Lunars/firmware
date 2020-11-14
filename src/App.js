@@ -178,24 +178,16 @@ const App = () => {
       <Sider breakpoint="lg" collapsedWidth="0">
         <Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]}>
           <Menu.Item key="bulletins">
-            <a href="/docs/bulletins/" target="_blank">
-              Bulletins
-            </a>
+            <a href="/docs/bulletins/">Bulletins</a>
           </Menu.Item>
           <Menu.Item key="wirings">
-            <a href="/docs/wirings/" target="_blank">
-              Wirings
-            </a>
+            <a href="/docs/wirings/">Wirings</a>
           </Menu.Item>
           <Menu.Item key="more">
-            <a href="/docs/more/" target="_blank">
-              Misc docs
-            </a>
+            <a href="/docs/more/">Misc docs</a>
           </Menu.Item>
           <Menu.Item key="sb">
-            <a href="/docs/sb/" target="_blank">
-              Service manual
-            </a>
+            <a href="/docs/sb/">Service manual</a>
           </Menu.Item>
         </Menu>
       </Sider>
