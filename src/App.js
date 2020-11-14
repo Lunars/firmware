@@ -183,8 +183,11 @@ const App = () => {
           <Menu.Item key="wirings">
             <a href="/docs/wirings">Wirings</a>
           </Menu.Item>
-          <Menu.Item key="maps">
-            <a href="/maps">Maps</a>
+          <Menu.Item key="more">
+            <a href="/docs/more">Misc docs</a>
+          </Menu.Item>
+          <Menu.Item key="sb">
+            <a href="/docs/sb">Service manual</a>
           </Menu.Item>
         </Menu>
       </Sider>
