@@ -178,16 +178,21 @@ const App = () => {
       <Sider breakpoint="lg" collapsedWidth="0">
         <Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]}>
           <Menu.Item key="bulletins">
-            <a href="/docs/bulletins/">Bulletins</a>
+            <a href="/docs/bulletins/">Service Bulletins</a>
           </Menu.Item>
-          <Menu.Item key="wirings">
-            <a href="/docs/wirings/">Wirings</a>
+          <Menu.Item key="s">
+            <a href="/model-s.html">Model S</a>
           </Menu.Item>
-          <Menu.Item key="more">
-            <a href="/docs/more/">Misc docs</a>
+          <Menu.Item key="x">
+            <a href="/model-x.html">Model X</a>
           </Menu.Item>
-          <Menu.Item key="sb">
-            <a href="/docs/sb/">Service manual</a>
+          <Menu.Item key="3">
+            <a href="/model-3.html">Model 3</a>
+          </Menu.Item>
+          <Menu.Item key="Y">
+            <a href="/protected-doc/ModelY/CircuitDiag/2020.1_ModelY-LHD-SOP.pdf">
+              Model Y
+            </a>
           </Menu.Item>
         </Menu>
       </Sider>
