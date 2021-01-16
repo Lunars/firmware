@@ -183,11 +183,11 @@ const App = () => {
           <Menu.Item key="s">
             <a href="/model-s.html">Model S</a>
           </Menu.Item>
-          <Menu.Item key="x">
-            <a href="/model-x.html">Model X</a>
-          </Menu.Item>
           <Menu.Item key="3">
             <a href="/model-3.html">Model 3</a>
+          </Menu.Item>
+          <Menu.Item key="x">
+            <a href="/model-x.html">Model X</a>
           </Menu.Item>
           <Menu.Item key="Y">
             <a href="/protected-doc/ModelY/CircuitDiag/2020.1_ModelY-LHD-SOP.pdf">
@@ -203,20 +203,11 @@ const App = () => {
               {...scrollProp}
               loading={loading}
               expandedRowRender={(record) => (
-                <>
-                  <Paragraph>
-                    Signature:{" "}
-                    <Text code copyable>
-                      {record.signature}
-                    </Text>
-                  </Paragraph>
-                  <Paragraph>
-                    MD5:{" "}
-                    <Text code copyable>
-                      {record.md5}
-                    </Text>
-                  </Paragraph>
-                </>
+                <Paragraph>
+                  <Text code copyable>
+                    {JSON.stringify(record, null, 2)}
+                  </Text>
+                </Paragraph>
               )}
               rowKey={"signature"}
               dataSource={response}
